@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import Routines from "./pages/Routines";
+import ActiveWorkout from "./pages/ActiveWorkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,8 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Route>
+          {/* Workout routes outside layout for full-screen experience */}
+          <Route path="/workout/:routineId" element={<ActiveWorkout />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

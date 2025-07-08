@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Routine {
   id: string;
@@ -42,6 +43,11 @@ const getCategoryColor = (category: string) => {
 };
 
 export const RoutineCard = ({ routine, onDuplicate, onDelete }: RoutineCardProps) => {
+  const navigate = useNavigate();
+
+  const handleStartWorkout = () => {
+    navigate(`/workout/${routine.id}`);
+  };
   return (
     <Card className="hover:shadow-md transition-shadow">
       <CardHeader className="pb-3">
@@ -126,7 +132,7 @@ export const RoutineCard = ({ routine, onDuplicate, onDelete }: RoutineCardProps
           </div>
         )}
         
-        <Button className="w-full">
+        <Button className="w-full" onClick={handleStartWorkout}>
           <Play className="h-4 w-4 mr-2" />
           {routine.isTemplate ? "Usar Plantilla" : "Comenzar Entrenamiento"}
         </Button>
