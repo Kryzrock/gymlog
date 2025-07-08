@@ -20,8 +20,8 @@ const navItems = [
   },
   { 
     icon: BarChart3, 
-    label: "Progreso", 
-    path: "/progress" 
+    label: "Estadísticas", 
+    path: "/statistics" 
   },
   { 
     icon: User, 
