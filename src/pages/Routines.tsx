@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Copy, Edit, Trash2, Calendar } from "lucide-react";
 import { CreateRoutineDialog } from "@/components/routines/CreateRoutineDialog";
+import { EditRoutineDialog } from "@/components/routines/EditRoutineDialog";
+import { DeleteConfirmDialog } from "@/components/routines/DeleteConfirmDialog";
 import { RoutineCard } from "@/components/routines/RoutineCard";
 
 interface Routine {
@@ -55,6 +57,9 @@ const mockRoutines: Routine[] = [
 const Routines = () => {
   const [routines, setRoutines] = useState<Routine[]>(mockRoutines);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [selectedRoutine, setSelectedRoutine] = useState<Routine | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("todas");
 
   const categories = [
@@ -90,8 +95,30 @@ const Routines = () => {
     setRoutines(prev => [...prev, duplicated]);
   };
 
+  const handleEditRoutine = (routine: Routine) => {
+    setSelectedRoutine(routine);
+    setIsEditDialogOpen(true);
+  };
+
+  const handleUpdateRoutine = (id: string, updatedRoutine: Omit<Routine, "id">) => {
+    setRoutines(prev => prev.map(r => 
+      r.id === id ? { ...updatedRoutine, id } : r
+    ));
+  };
+
   const handleDeleteRoutine = (id: string) => {
-    setRoutines(prev => prev.filter(r => r.id !== id));
+    const routine = routines.find(r => r.id === id);
+    if (routine) {
+      setSelectedRoutine(routine);
+      setIsDeleteDialogOpen(true);
+    }
+  };
+
+  const confirmDeleteRoutine = () => {
+    if (selectedRoutine) {
+      setRoutines(prev => prev.filter(r => r.id !== selectedRoutine.id));
+      setSelectedRoutine(null);
+    }
   };
 
   return (
@@ -133,6 +160,7 @@ const Routines = () => {
                 key={routine.id}
                 routine={routine}
                 onDuplicate={handleDuplicateRoutine}
+                onEdit={handleEditRoutine}
                 onDelete={handleDeleteRoutine}
               />
             ))}
@@ -149,6 +177,7 @@ const Routines = () => {
               key={routine.id}
               routine={routine}
               onDuplicate={handleDuplicateRoutine}
+              onEdit={handleEditRoutine}
               onDelete={handleDeleteRoutine}
             />
           ))}
@@ -159,6 +188,20 @@ const Routines = () => {
         open={isCreateDialogOpen}
         onOpenChange={setIsCreateDialogOpen}
         onCreateRoutine={handleCreateRoutine}
+      />
+
+      <EditRoutineDialog
+        open={isEditDialogOpen}
+        onOpenChange={setIsEditDialogOpen}
+        routine={selectedRoutine}
+        onEditRoutine={handleUpdateRoutine}
+      />
+
+      <DeleteConfirmDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        routineName={selectedRoutine?.name || ""}
+        onConfirm={confirmDeleteRoutine}
       />
     </div>
   );

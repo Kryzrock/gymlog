@@ -26,6 +26,7 @@ interface Routine {
 interface RoutineCardProps {
   routine: Routine;
   onDuplicate: (routine: Routine) => void;
+  onEdit: (routine: Routine) => void;
   onDelete: (id: string) => void;
 }
 
@@ -42,7 +43,7 @@ const getCategoryColor = (category: string) => {
   }
 };
 
-export const RoutineCard = ({ routine, onDuplicate, onDelete }: RoutineCardProps) => {
+export const RoutineCard = ({ routine, onDuplicate, onEdit, onDelete }: RoutineCardProps) => {
   const navigate = useNavigate();
 
   const handleStartWorkout = () => {
@@ -79,7 +80,7 @@ export const RoutineCard = ({ routine, onDuplicate, onDelete }: RoutineCardProps
               </DropdownMenuItem>
               {!routine.isTemplate && (
                 <>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => onEdit(routine)}>
                     <Edit className="h-4 w-4 mr-2" />
                     Editar
                   </DropdownMenuItem>
