@@ -1,4 +1,4 @@
-import { Home, Dumbbell, BarChart3, User, BookOpen } from "lucide-react";
+import { Home, Dumbbell, BarChart3, User, BookOpen, Target } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -9,24 +9,19 @@ const navItems = [
     path: "/" 
   },
   { 
-    icon: Dumbbell, 
-    label: "Entrenar", 
-    path: "/workout" 
-  },
-  { 
     icon: BookOpen, 
     label: "Rutinas", 
     path: "/routines" 
   },
   { 
+    icon: Target, 
+    label: "Ejercicios", 
+    path: "/exercises" 
+  },
+  { 
     icon: BarChart3, 
     label: "Estadísticas", 
     path: "/statistics" 
-  },
-  { 
-    icon: User, 
-    label: "Perfil", 
-    path: "/profile" 
   },
 ];
 
