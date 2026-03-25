@@ -1,28 +1,12 @@
-import { Home, Dumbbell, BarChart3, User, BookOpen, Target } from "lucide-react";
+import { Home, BookOpen, Target, BarChart3 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { 
-    icon: Home, 
-    label: "Inicio", 
-    path: "/" 
-  },
-  { 
-    icon: BookOpen, 
-    label: "Rutinas", 
-    path: "/routines" 
-  },
-  { 
-    icon: Target, 
-    label: "Ejercicios", 
-    path: "/exercises" 
-  },
-  { 
-    icon: BarChart3, 
-    label: "Estadísticas", 
-    path: "/statistics" 
-  },
+  { icon: Home, label: "Inicio", path: "/" },
+  { icon: BookOpen, label: "Rutinas", path: "/routines" },
+  { icon: Target, label: "Ejercicios", path: "/exercises" },
+  { icon: BarChart3, label: "Estadísticas", path: "/statistics" },
 ];
 
 export const BottomNavigation = () => {
