@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Barra central -->
+  <rect x="8" y="14.5" width="16" height="3" rx="1.5" fill="#6366f1"/>
+  <!-- Peso izquierdo exterior -->
+  <rect x="2" y="11" width="3" height="10" rx="1.5" fill="#6366f1"/>
+  <!-- Peso izquierdo interior -->
+  <rect x="6" y="12.5" width="2.5" height="7" rx="1" fill="#6366f1"/>
+  <!-- Peso derecho interior -->
+  <rect x="23.5" y="12.5" width="2.5" height="7" rx="1" fill="#6366f1"/>
+  <!-- Peso derecho exterior -->
+  <rect x="27" y="11" width="3" height="10" rx="1.5" fill="#6366f1"/>
+</svg>
