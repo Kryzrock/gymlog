@@ -1,73 +1,66 @@
-# Welcome to your Lovable project
+# 🏋️ GymLog
 
-## Project info
+Aplicación de seguimiento de entrenamientos en gimnasio. Mobile-first, dark theme.
 
-**URL**: https://lovable.dev/projects/dba0c37c-c00a-45d9-aa82-b2d631f14f15
+## Stack
 
-## How can I edit this code?
+- **React 18** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS** (estilos)
+- **shadcn/ui** (componentes base)
+- **Recharts** (gráficos)
+- **React Router v6** (navegación)
 
-There are several ways of editing your application.
+## Funcionalidades
 
-**Use Lovable**
+- **Dashboard** — Stats rápidas, acciones directas, entrenamientos recientes
+- **Rutinas** — Crear, editar, duplicar, eliminar. Asociar ejercicios reales
+- **Ejercicios** — Biblioteca con 12+ ejercicios, filtros por músculo/equipo/dificultad, crear personalizados
+- **Entrenamiento Activo** — Timer, registro de series (peso/reps), descanso automático, barra de progreso
+- **Estadísticas** — Volumen mensual, frecuencia semanal, historial completo
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/dba0c37c-c00a-45d9-aa82-b2d631f14f15) and start prompting.
+## Setup
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# Clonar
+git clone https://github.com/Kryzrock/gymlog.git
+cd gymlog
 
-**Use your preferred IDE**
+# Instalar dependencias
+npm install
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Iniciar dev server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Abre `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Estructura del Proyecto
 
-**Use GitHub Codespaces**
+```
+src/
+├── app/                  # App, rutas, layouts
+├── features/             # Módulos por dominio
+│   ├── dashboard/
+│   ├── routines/
+│   ├── exercises/
+│   ├── workout/
+│   └── statistics/
+├── components/
+│   ├── ui/               # shadcn/ui
+│   └── shared/           # Componentes reutilizables
+├── data/                 # Ejercicios y rutinas seed
+├── lib/                  # Utils, storage, constantes
+├── types/                # TypeScript interfaces
+└── hooks/                # Custom hooks globales
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Ver [PLAN.md](./PLAN.md) para el plan de ejecución completo.
 
-## What technologies are used for this project?
+## Desarrollo
 
-This project is built with:
+El proyecto se está migrando desde Lovable a una arquitectura modular propia. El plan de migración está documentado en `PLAN.md` con 9 fases desde setup hasta polish.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Licencia
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/dba0c37c-c00a-45d9-aa82-b2d631f14f15) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT
