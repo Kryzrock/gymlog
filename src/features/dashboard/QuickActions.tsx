@@ -2,29 +2,40 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Dumbbell, BarChart3, Play } from "lucide-react";
 
-const ACTIONS = [
-  { label: "Iniciar entrenamiento", icon: Play, path: "/routines", variant: "default" as const },
-  { label: "Mis rutinas", icon: BookOpen, path: "/routines", variant: "outline" as const },
-  { label: "Ejercicios", icon: Dumbbell, path: "/exercises", variant: "outline" as const },
-  { label: "Estadísticas", icon: BarChart3, path: "/statistics", variant: "outline" as const },
+const SECONDARY = [
+  { label: "Mis rutinas", icon: BookOpen, path: "/routines" },
+  { label: "Ejercicios", icon: Dumbbell, path: "/exercises" },
+  { label: "Estadísticas", icon: BarChart3, path: "/statistics" },
 ];
 
 export function QuickActions() {
   const navigate = useNavigate();
 
   return (
-    <div className="grid grid-cols-2 gap-3">
-      {ACTIONS.map((action) => (
-        <Button
-          key={action.label}
-          variant={action.variant}
-          className="h-16 flex-col gap-1.5 text-xs"
-          onClick={() => navigate(action.path)}
-        >
-          <action.icon className="h-5 w-5" />
-          {action.label}
-        </Button>
-      ))}
+    <div className="space-y-3">
+      {/* CTA principal */}
+      <Button
+        className="w-full h-14 text-sm gap-2"
+        onClick={() => navigate("/routines")}
+      >
+        <Play className="h-5 w-5" />
+        Iniciar entrenamiento
+      </Button>
+
+      {/* Acciones secundarias */}
+      <div className="grid grid-cols-3 gap-3">
+        {SECONDARY.map((action) => (
+          <Button
+            key={action.label}
+            variant="outline"
+            className="h-16 flex-col gap-1.5 text-xs"
+            onClick={() => navigate(action.path)}
+          >
+            <action.icon className="h-5 w-5" />
+            {action.label}
+          </Button>
+        ))}
+      </div>
     </div>
   );
 }
