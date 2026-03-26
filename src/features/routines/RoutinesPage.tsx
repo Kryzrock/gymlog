@@ -52,7 +52,7 @@ export default function RoutinesPage() {
   };
 
   return (
-    <div className="p-4 space-y-6">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -89,7 +89,7 @@ export default function RoutinesPage() {
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
             Mis Rutinas
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {personalRoutines.map((routine) => (
               <RoutineCard
                 key={routine.id}
@@ -110,7 +110,7 @@ export default function RoutinesPage() {
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
             Plantillas
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {templates.map((routine) => (
               <RoutineCard
                 key={routine.id}

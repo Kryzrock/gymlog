@@ -14,6 +14,7 @@ interface ExerciseFiltersProps {
   filters: ExerciseFilterState;
   onChange: (filters: ExerciseFilterState) => void;
   onClear: () => void;
+  showSearch?: boolean;
 }
 
 const MUSCLE_OPTIONS = [
@@ -41,7 +42,7 @@ const CATEGORY_OPTIONS: { value: Category | "todos"; label: string }[] = [
   { value: "cardio", label: "Cardio" },
 ];
 
-export function ExerciseFilters({ filters, onChange, onClear }: ExerciseFiltersProps) {
+export function ExerciseFilters({ filters, onChange, onClear, showSearch = true }: ExerciseFiltersProps) {
   const isActive =
     !!filters.search ||
     filters.muscleGroup !== "todos" ||
@@ -50,24 +51,26 @@ export function ExerciseFilters({ filters, onChange, onClear }: ExerciseFiltersP
 
   return (
     <div className="space-y-4">
-      {/* Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Buscar ejercicios..."
-          value={filters.search}
-          onChange={(e) => onChange({ ...filters, search: e.target.value })}
-          className="pl-10 pr-10"
-        />
-        {filters.search && (
-          <button
-            onClick={() => onChange({ ...filters, search: "" })}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        )}
-      </div>
+      {/* Search — opcional (oculto en sidebar desktop) */}
+      {showSearch && (
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Buscar ejercicios..."
+            value={filters.search}
+            onChange={(e) => onChange({ ...filters, search: e.target.value })}
+            className="pl-10 pr-10"
+          />
+          {filters.search && (
+            <button
+              onClick={() => onChange({ ...filters, search: "" })}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Muscle group */}
       <div className="space-y-1.5">
