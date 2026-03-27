@@ -4,12 +4,18 @@ import { storage } from "@/lib/storage";
 import { STORAGE_KEYS } from "@/lib/constants";
 import { DEFAULT_EXERCISES } from "@/data/default-exercises";
 
+export interface DailyVolume {
+  day: string;   // "L", "M", "X"…
+  volume: number;
+}
+
 export interface DashboardStats {
   workoutsThisMonth: number;
   weeklyVolume: number;        // kg
   totalExercises: number;
   streak: number;              // consecutive days
   recentWorkouts: WorkoutRecord[];
+  dailyVolume: DailyVolume[];  // últimos 7 días
 }
 
 function compute(): DashboardStats {
@@ -41,12 +47,27 @@ function compute(): DashboardStats {
       cursor.setDate(cursor.getDate() - 1);
     }
 
+    // Daily volume — last 7 days
+    const DAY_LABELS = ["D", "L", "M", "X", "J", "V", "S"];
+    const dailyVolume: DailyVolume[] = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(now);
+      d.setDate(d.getDate() - (6 - i));
+      const dateStr = d.toISOString().slice(0, 10);
+      const volume = Math.round(
+        history
+          .filter((r) => r.startedAt.slice(0, 10) === dateStr)
+          .reduce((sum, r) => sum + r.totalVolume, 0)
+      );
+      return { day: DAY_LABELS[d.getDay()], volume };
+    });
+
     return {
       workoutsThisMonth,
       weeklyVolume,
       totalExercises: exercises.length,
       streak,
       recentWorkouts: history.slice(0, 3),
+      dailyVolume,
     };
   } catch {
     return {
@@ -55,6 +76,7 @@ function compute(): DashboardStats {
       totalExercises: 0,
       streak: 0,
       recentWorkouts: [],
+      dailyVolume: [],
     };
   }
 }
